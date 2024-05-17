@@ -1,0 +1,6 @@
+# basic
+node_modules
+package.json
+
+# build
+bin
