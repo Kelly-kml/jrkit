@@ -14,6 +14,15 @@
       "@": [
         "./src"
       ],
+      "@utils": [
+        "./src/utils"
+      ],
+      "@config": [
+        "./src/config"
+      ],
+      "commands": [
+        "./src/commands"
+      ]
     }
   }
 }
