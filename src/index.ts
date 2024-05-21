@@ -3,9 +3,10 @@
 // index.ts
 import { Command } from 'commander';
 import Pack from '../package.json';
-import { Cblue, Cred, Cgreen } from '@utils';
+import Commands from '@commands';
+// import { Cblue, Cred, Cgreen } from '@utils';
 
-// import {loading } from '@utils';
+import { loading } from '@utils';
 
 // import inquirer from 'inquirer';
 
@@ -81,30 +82,40 @@ program
   //       console.log(JSON.stringify(answers, null, '  '));
   //     });
   // });
-  // .command('loading')
-  // .action(() => {
-  //   loading.start({
-  //     color: 'red',
-  //     text: 'begin',
-  //   });
-  //   setTimeout(() => {
-  //     loading.warn('警告');
-  //     setTimeout(() => {
-  //       loading.info('提示');
-  //       setTimeout(() => {
-  //         loading.start('第二次');
-  //         setTimeout(() => {
-  //           loading.stop();
-  //         }, 2000);
-  //       }, 2000);
-  //     }, 2000);
-  //   }, 2000);
-  // });
-  .command('chalk')
+  .command('loading')
   .action(() => {
-    console.log(Cblue('蓝色'));
-    console.log(Cred('红色'));
-    console.log(Cgreen('绿色'));
+    loading.start({
+      color: 'red',
+      text: 'begin',
+    });
+    setTimeout(() => {
+      loading.warn('警告');
+      setTimeout(() => {
+        loading.info('提示');
+        setTimeout(() => {
+          loading.start('第二次');
+          setTimeout(() => {
+            loading.stop();
+          }, 2000);
+        }, 2000);
+      }, 2000);
+    }, 2000);
   });
+// .command('chalk')
+// .action(() => {
+//   console.log(Cblue('蓝色'));
+//   console.log(Cred('红色'));
+//   console.log(Cgreen('绿色'));
+// });
+
+Object.keys(Commands).forEach((command) => {
+  const current = program.command(command);
+  if (Commands[command].option && Commands[command].option.length > 0) {
+    Commands[command].option.forEach((item) => {
+      current.option(item.cmd, item.msg || '');
+    });
+  }
+  current.action(Commands[command].action);
+});
 
 program.parse();

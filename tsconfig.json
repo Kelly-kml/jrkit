@@ -20,7 +20,7 @@
       "@config": [
         "./src/config"
       ],
-      "commands": [
+      "@commands": [
         "./src/commands"
       ]
     }
